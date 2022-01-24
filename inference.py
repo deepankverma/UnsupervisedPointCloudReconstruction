@@ -114,7 +114,8 @@ class Inference(object):
             elif self.task == "classify":
                 feature = self.model(pts)
             feature_train.append(feature.detach().cpu().numpy().squeeze(1))
-            lbs_train.append(lbs.cpu().numpy().squeeze(1))
+            # lbs_train.append(lbs.cpu().numpy().squeeze(1))
+            lbs_train.append(lbs.cpu().numpy())
             if ((iter+1) * self.batch_size % 2048) == 0 \
                 or (iter+1) == len(self.infer_loader_train):
                 feature_train = np.concatenate(feature_train, axis=0)
@@ -151,7 +152,8 @@ class Inference(object):
             elif self.task == "classify":
                 feature = self.model(pts)
             feature_test.append(feature.detach().cpu().numpy().squeeze(1))
-            lbs_test.append(lbs.cpu().numpy().squeeze(1))
+            # lbs_test.append(lbs.cpu().numpy().squeeze(1))
+            lbs_test.append(lbs.cpu().numpy())
             if ((iter+1) * self.batch_size % 2048) == 0 \
                 or (iter+1) == len(self.infer_loader_test):
                 feature_test = np.concatenate(feature_test, axis=0)
